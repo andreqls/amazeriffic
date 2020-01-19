@@ -1,0 +1,46 @@
+body {
+	margin: 0;
+	padding: 0;
+	width: 1120px;
+	font-family: sans-serif;
+}
+
+header, main, footer {
+	overflow: auto;
+}
+
+main {
+	border-top: dotted black 1px;
+}
+
+section.poem {
+	background: lavender;
+	width: 400px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	padding-left: 5px;
+	border-radius: 10px;
+}
+
+footer {
+	background: gainsboro;
+	padding-bottom: 50px;
+}
+
+header h1, main div, footer div.contact {
+	width: 550px;
+	float: left;
+	margin-left: 150px;
+}
+
+header nav, main img, footer div.sitemap {
+	width: 270px;
+	float: right;
+	margin-right: 150px;
+}
+
+footer div p, footer div ul {
+	font-size: smaller;
+	margin: 0;
+	padding: 0;
+}

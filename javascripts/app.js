@@ -1,14 +1,15 @@
 var main = function () {
 	"use strict";
 
-	var toDos = [
+	var toDos = [];
+		/*= [
 		"Finish writing this book",
 		"Take Gracie to the park",
 		"Answer emails",
 		"Prep for Monday's class",
 		"Make up some more ToDos",
 		"Get Groceries"
-	];
+	];*/
 
 	var addNewToDo = function (ntd) {
 		var whtre = /^(?!\s*$).+/g;

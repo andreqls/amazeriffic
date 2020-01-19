@@ -41,6 +41,16 @@ div.content ul li {
 	border-radius: 5px;
 }
 
+#newtodo {
+	margin: 20px 0 20px 20px; 
+	width: 250px;
+}
+
+#addtodo {
+	background-color: darkgray;
+	border-radius: 5px;
+}
+
 footer {
 	background: gainsboro;
 	padding-bottom: 50px;

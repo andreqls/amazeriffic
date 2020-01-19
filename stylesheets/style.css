@@ -10,16 +10,40 @@ header, main, footer {
 }
 
 main {
+	padding-left: 150px;
+	padding-right: 150px;
+	padding-top: 20px;
+	padding-bottom: 20px;
 	border-top: dotted black 1px;
 }
 
-section.poem {
-	background: lavender;
-	width: 400px;
+.tabs a span {
+	display: inline-block;
+	border-radius: 5px 5px 0 0;
+	width: 100px;
+	margin-right: 10px;
+	text-align: center;
+	background: #ddd;
+	padding: 5px;
+}
+
+.tabs a span.active, div.content {
+	background: #eee;
+}
+
+div.content ul {
+	margin: 0;
+	padding: 20px;
+	list-style-type: none;
+}
+
+div.content ul li {
+	padding-left: 5px;
 	padding-top: 1px;
 	padding-bottom: 1px;
-	padding-left: 5px;
-	border-radius: 10px;
+	margin: 10px;
+	background: #fff;
+	border-radius: 5px;
 }
 
 footer {
@@ -27,13 +51,13 @@ footer {
 	padding-bottom: 50px;
 }
 
-header h1, main div, footer div.contact {
+header h1, footer div.contact {
 	width: 550px;
 	float: left;
 	margin-left: 150px;
 }
 
-header nav, main img, footer div.sitemap {
+header nav, footer div.sitemap {
 	width: 270px;
 	float: right;
 	margin-right: 150px;

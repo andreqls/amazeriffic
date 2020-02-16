@@ -31,6 +31,34 @@ var main = function (toDoObjects) {
 			}
 			else if ($element.parent().is(":nth-child(3)")) {
 				console.log("the tags tab was clicked!");
+
+				var organizedByTag = [
+					{
+						"name": "shopping",
+						"toDos": ["Get groceries"]
+					},
+					{
+						"name": "chores",
+						"toDos": ["Get groceries", "Take Gracie to the park"]
+					},
+					{
+						"name": "writing",
+						"toDos": ["Make up some new ToDos", "Finish writing this book"]
+					},
+					{
+						"name": "work",
+						"toDos": ["Make up some new ToDos", "Prep for Monday's class",
+							"Answer emails", "Finish writing this book"]
+					},
+					{
+						"name": "teaching",
+						"toDos": ["Prep for Monday's class"]
+					},
+					{
+						"name": "pets",
+						"toDos": ["Take Gracie to the park"]
+					}
+				];
 			}
 			else if ($element.parent().is(":nth-child(4)")) {
 				$("main .content").append("<input id=\"newtodo\"><button id=\"addtodo\"><b>+</b></button>");

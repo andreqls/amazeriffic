@@ -1,13 +1,9 @@
 var main = function (toDoObjects) {
 	"use strict";
 
-	var toDos = [];
-
-	var addNewToDo = function (ntd) {
-		var whtre = /^(?!\s*$).+/g;
-		var OK=whtre.exec(ntd);
-		if (OK) toDos.push(ntd);
-	};
+	var toDos = toDoObjects.map(function (toDo) {
+		return toDo.description;
+	});
 
 	$(".tabs span").toArray().forEach(function (element) {
 		$(element).on("click", function() {

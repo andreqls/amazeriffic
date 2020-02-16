@@ -41,6 +41,13 @@ div.content ul li {
 	border-radius: 5px;
 }
 
+div.content h3 {
+	padding: 5px;
+	margin: 10px;
+	background: #ddd;
+	border-radius: 5px;
+}
+
 #newtodo {
 	margin: 20px 0 20px 20px; 
 	width: 250px;

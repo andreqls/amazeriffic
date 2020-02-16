@@ -1,15 +1,7 @@
-var main = function () {
+var main = function (toDoObjects) {
 	"use strict";
 
 	var toDos = [];
-		/*= [
-		"Finish writing this book",
-		"Take Gracie to the park",
-		"Answer emails",
-		"Prep for Monday's class",
-		"Make up some more ToDos",
-		"Get Groceries"
-	];*/
 
 	var addNewToDo = function (ntd) {
 		var whtre = /^(?!\s*$).+/g;
@@ -64,4 +56,8 @@ var main = function () {
 	$(".tabs a:first-child span").trigger("click");
 };
 
-$(document).ready(main);
+$(document).ready(function () {
+	$.getJSON("todos.json", function (toDoObjects) {
+		main(toDoObjects);
+	});
+});

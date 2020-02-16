@@ -30,8 +30,6 @@ var main = function (toDoObjects) {
 				$("main .content").append($content);
 			}
 			else if ($element.parent().is(":nth-child(3)")) {
-				console.log("the tags tab was clicked!");
-
 				var organizedByTag = [
 					{
 						"name": "shopping",
@@ -59,6 +57,19 @@ var main = function (toDoObjects) {
 						"toDos": ["Take Gracie to the park"]
 					}
 				];
+
+				organizedByTag.forEach(function (tag) {
+					var $tagName=$("<h3>").text(tag.name);
+					var $content=$("<ul>");
+
+					tag.toDos.forEach(function (description) {
+						var $task=$("<li>").text(description);
+						$content.append($task);
+					});
+
+					$("main .content").append($tagName);
+					$("main .content").append($content);
+				});
 			}
 			else if ($element.parent().is(":nth-child(4)")) {
 				$("main .content").append("<input id=\"newtodo\"><button id=\"addtodo\"><b>+</b></button>");

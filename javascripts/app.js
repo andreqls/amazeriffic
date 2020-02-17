@@ -1,16 +1,9 @@
 var tagIndex = function (tag, tagsList) {
 	var i;
 	for (i=0;i<tagsList.length;i++) {
-		if (tagsList[i].name.localeCompare(tag)==0) {
-			console.log("TRUE: tagElement.name="+tagsList[i].name+", tag="+tag);
-			return i;
-		}
+		if (tagsList[i].name.localeCompare(tag)==0) return i;
 	}
 	return -1;
-};
-
-var updateTag = function (tagArray, index, newTask) {
-	tagArray[index].toDos.push(newTask);
 };
 
 var organizeByTags = function (toDosList) {
@@ -24,7 +17,7 @@ var organizeByTags = function (toDosList) {
 					"toDos": [toDoItem.description]
 				});
 			}
-			else updateTag(organizedByTags, ind, toDoItem.description);
+			else organizedByTags[ind].toDos.push(toDoItem.description);
 		});
 	});
 	return organizedByTags;

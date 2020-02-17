@@ -1,3 +1,35 @@
+var tagIndex = function (tag, tagsList) {
+	var i;
+	for (i=0;i<tagsList.length;i++) {
+		if (tagsList[i].name.localeCompare(tag)==0) {
+			console.log("TRUE: tagElement.name="+tagsList[i].name+", tag="+tag);
+			return i;
+		}
+	}
+	return -1;
+};
+
+var updateTag = function (tagArray, index, newTask) {
+	tagArray[index].toDos.push(newTask);
+};
+
+var organizeByTags = function (toDosList) {
+	var organizedByTags = [];
+	toDosList.forEach(function (toDoItem) { // toDoItem = { "description":"...", "tags":[...] }
+		toDoItem.tags.forEach(function (tagItem) { // tagItem="..."
+			var ind=tagIndex(tagItem, organizedByTags);
+			if (ind==-1) {
+				organizedByTags.push({
+					"name": tagItem,
+					"toDos": [toDoItem.description]
+				});
+			}
+			else updateTag(organizedByTags, ind, toDoItem.description);
+		});
+	});
+	return organizedByTags;
+};
+
 var main = function (toDoObjects) {
 	"use strict";
 
@@ -30,34 +62,7 @@ var main = function (toDoObjects) {
 				$("main .content").append($content);
 			}
 			else if ($element.parent().is(":nth-child(3)")) {
-				var organizedByTag = [
-					{
-						"name": "shopping",
-						"toDos": ["Get groceries"]
-					},
-					{
-						"name": "chores",
-						"toDos": ["Get groceries", "Take Gracie to the park"]
-					},
-					{
-						"name": "writing",
-						"toDos": ["Make up some new ToDos", "Finish writing this book"]
-					},
-					{
-						"name": "work",
-						"toDos": ["Make up some new ToDos", "Prep for Monday's class",
-							"Answer emails", "Finish writing this book"]
-					},
-					{
-						"name": "teaching",
-						"toDos": ["Prep for Monday's class"]
-					},
-					{
-						"name": "pets",
-						"toDos": ["Take Gracie to the park"]
-					}
-				];
-
+				var organizedByTag = organizeByTags(toDoObjects);
 				organizedByTag.forEach(function (tag) {
 					var $tagName=$("<h3>").text(tag.name);
 					var $content=$("<ul>");

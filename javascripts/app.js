@@ -23,12 +23,17 @@ var organizeByTags = function (toDosList) {
 	return organizedByTags;
 };
 
+var fetchToDos = function (toDoObjects) {
+	var toDosList = toDoObjects.map(function(toDo) {
+		return toDo.description;
+	});
+	return toDosList;
+}
+
 var main = function (toDoObjects) {
 	"use strict";
 
-	var toDos = toDoObjects.map(function (toDo) {
-		return toDo.description;
-	});
+	var toDos = fetchToDos(toDoObjects);
 
 	$(".tabs span").toArray().forEach(function (element) {
 		$(element).on("click", function() {
@@ -70,20 +75,31 @@ var main = function (toDoObjects) {
 				});
 			}
 			else if ($element.parent().is(":nth-child(4)")) {
-				$("main .content").append("<input id=\"newtodo\"><button id=\"addtodo\"><b>+</b></button>");
+				var $inputDescription = $("<input>").addClass("description"),
+					$descriptionLabel = $("<p>").text("Description:"),
+					$inputTags = $("<input>").addClass("tags"),
+					$tagLabel = $("<p>").text("Tags:"),
+					$button = $("<button>").text("+");
 
-				$("#addtodo").on("click", function () {
-					addNewToDo($("#newtodo").val());
-					$("#newtodo").val("");
+				var $content = $("<div>").append($descriptionLabel);
+				$content.append($inputDescription);
+				$content.append($tagLabel);
+				$content.append($inputTags);
+				$content.append($button);
+				$("main .content").append($content);
+
+				$button.on("click", function () {
+					var description = $inputDescription.val(),
+						tags = $inputTags.val().split(",");
+
+					toDoObjects.push({"description":description, "tags":tags});
+					
+					toDos=fetchToDos(toDoObjects);
+
+					$inputDescription.val("");
+					$inputTags.val("");
 				});
 
-				$("#newtodo").on("keypress", function (event) {
-//					console.log(event.keyCode);
-					if (event.keyCode===13) {
-						addNewToDo($("#newtodo").val());
-						$("#newtodo").val("");
-					}
-				});
 			}
 
 			return false; // this is necessary for the handler, otherwise the browser will follow the link

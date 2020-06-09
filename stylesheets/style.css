@@ -1,0 +1,75 @@
+body {
+	margin: 0;
+	padding: 0;
+	width: 1120px;
+	font-family: sans-serif;
+}
+
+header, main, footer {
+	overflow: auto;
+}
+
+main {
+	padding: 20px 150px 20px 150px;
+	border-top: dotted black 1px;
+}
+
+.tabs a span {
+	display: inline-block;
+	border-radius: 5px 5px 0 0;
+	width: 100px;
+	margin-right: 10px;
+	text-align: center;
+	background: #ddd;
+	padding: 5px;
+}
+
+.tabs a span.active, div.content {
+	background: #eee;
+}
+
+div.content ul {
+	margin: 0;
+	padding: 20px;
+	list-style-type: none;
+}
+
+div.content ul li {
+	padding: 1px 5px 1px 5px;
+	margin: 10px;
+	background: #fff;
+	border-radius: 5px;
+}
+
+#newtodo {
+	margin: 20px 0 20px 20px; 
+	width: 250px;
+}
+
+#addtodo {
+	background-color: darkgray;
+	border-radius: 5px;
+}
+
+footer {
+	background: gainsboro;
+	padding-bottom: 50px;
+}
+
+header h1, footer div.contact {
+	width: 550px;
+	float: left;
+	margin-left: 150px;
+}
+
+header nav, footer div.sitemap {
+	width: 270px;
+	float: right;
+	margin-right: 150px;
+}
+
+footer div p, footer div ul {
+	font-size: smaller;
+	margin: 0;
+	padding: 0;
+}

@@ -22,4 +22,20 @@ header, main {
     width: 33%;
 }
 
+.tabs a div {
+    width: 20%;
+    border-radius: 5px 5px 0 0;
+    margin-right: 10px;
+    text-align: center;
+    background: #ddd;
+    padding: 5px;
+    float: left;
+}
 
+.tabs a div.active, .content {
+    background: #eee;
+}
+
+.items {
+    margin: 0;
+}

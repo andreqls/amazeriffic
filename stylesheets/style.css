@@ -1,0 +1,25 @@
+body{
+    background: #f9e933;
+    font-family: sans-serif;
+}
+
+header, main, footer {
+    width: 855px;
+    margin: auto;
+}
+
+header, main {
+    background: white;
+}
+
+.leftcolumn {
+    float: left;
+    width: 67%;
+}
+
+.rightcolumn {
+    float: right;
+    width: 33%;
+}
+
+

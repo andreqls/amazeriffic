@@ -1,7 +1,9 @@
 var main = function () {
     "use strict";
 
-    var toDos = [
+    var toDos = [];
+
+    var oldToDos = [
         "Finish writing book",
         "Take Gracie to the park",
         "Answer emails",
@@ -45,7 +47,7 @@ var main = function () {
             else if ($element.parent().is(":nth-child(3)")) {
                 var ntodo;
                 $content=$("<div>");
-                $content.append($("<input>").attr("type","text"));
+                $content.append($("<input>").attr({"type":"text"}));
                 $content.append($("<button>").text("+"));
 
                 $content.hide();
@@ -55,9 +57,11 @@ var main = function () {
                 $("main .content input").on("keypress", function (event) {
                     if (event.keyCode==13) {
                         ntodo=$("main .content input").val();
-                        toDos.push(ntodo);
-                        window.alert(ntodo+" added to ToDo list!");
-                        $("main .content input").val("");
+                        if (ntodo) {
+                            toDos.push(ntodo);
+                            showAlert(ntodo);
+                            $("main .content input").val("");
+                        }
                     }
                 });
                 
@@ -65,7 +69,7 @@ var main = function () {
                     ntodo=$("main .content input").val();
                     if (ntodo) { // only do something if ntodo is defined
                         toDos.push(ntodo);
-                        window.alert(ntodo+" added to ToDo list!");
+                        showAlert(ntodo);
                         $("main .content input").val("");
                     }
                 });
@@ -75,8 +79,25 @@ var main = function () {
         });
     });
 
-    $(".tabs a:first-child div").trigger("click");
+    $(".tabs a:nth-child(3) div").trigger("click");
 
 };
+
+var showAlert = function (item) {
+    var $alertline = $("<div>");
+    var $alertbox = $("<span>").attr("style","margin-bottom: 5px; border-radius: 5px 5px 5px 5px; padding: 5px; color: white; background: green; opacity: 0.6; float: left;");
+    $alertbox.text("\""+item+"\" was added to the list!");
+    $alertline.append($alertbox);
+    $alertline.append($("<div>").attr("style","clear: both"));
+    $alertbox.hide();
+    $("main .content").prepend($alertline);
+    $alertbox.fadeIn();
+    sleep(1000).then(() => $alertbox.fadeOut());
+};
+
+var sleep = function (ms) {
+    return new Promise(resolve => setTimeout(resolve,ms));
+};
+
 
 $(document).ready(main);

@@ -1,0 +1,45 @@
+body{
+    background: #f9e933;
+    font-family: sans-serif;
+}
+
+header, main, footer {
+    width: 855px;
+    margin: auto;
+}
+
+header, main {
+    background: white;
+}
+
+.leftcolumn {
+    float: left;
+    width: 67%;
+}
+
+.rightcolumn {
+    float: right;
+    width: 33%;
+}
+
+.content {
+    padding: 10px;
+}
+
+.tabs a div {
+    width: 15%;
+    border-radius: 5px 5px 0 0;
+    margin-right: 5px;
+    text-align: center;
+    background: #ddd;
+    padding: 5px;
+    float: left;
+}
+
+.tabs a div.active, .content {
+    background: #eee;
+}
+
+ul {
+    margin: 0;
+}

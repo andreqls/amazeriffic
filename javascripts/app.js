@@ -1,9 +1,11 @@
-var main = function () {
+var main = function (toDoObjects) {
     "use strict";
 
-    var toDos = [];
+    var toDos = toDoObjects.map(function (toDo) {
+		return toDo.description;
+	});
 
-    var oldToDos = [
+/*    var oldToDos = [
         "Finish writing book",
         "Take Gracie to the park",
         "Answer emails",
@@ -11,7 +13,7 @@ var main = function () {
         "Get groceries",
         "Read on CSS"
     ];
-
+*/
 
     $(".tabs div").toArray().forEach(function (element) {
         $(element).on("click", function () {
@@ -44,10 +46,33 @@ var main = function () {
                 $content.fadeIn();
             }
 
-            else if ($element.parent().is(":nth-child(3)")) {
+			else if ($element.parent().is(":nth-child(3)")) {
+				var organizedByTag = tagOrg(toDoObjects);
+				console.log(organizedByTag);
+
+				organizedByTag.forEach(function (tag) {
+					var $tagName=$("<h3>").text(tag.name),
+						$content=$("<ul>");
+
+					tag.todos.forEach(function (description) {
+						var $li = $("<li>").text(description);
+						$content.append($li);
+					});
+
+					$("main .content").append($tagName);
+					$("main .content").append($content);
+				});
+			}
+
+            else if ($element.parent().is(":nth-child(4)")) {
                 var ntodo;
                 $content=$("<div>");
+
+				$content.append($("<p>").text("Description"));
                 $content.append($("<input>").attr({"type":"text"}));
+
+				$content.append($("<p>").text("Tags"));
+				$content.append($("<input>").attr({"type":"text"}));
                 $content.append($("<button>").text("+"));
 
                 $content.hide();
@@ -83,6 +108,23 @@ var main = function () {
 
 };
 
+var tagOrg = function (toDoObjects) {
+	var tagList=[],tagsObject=[];
+	toDoObjects.forEach(function (todo) {
+		todo.tags.forEach(function (tag) {
+			if (tag in tagList) {
+				tagsObject[tagList.indexOf(tag)].todos.push(todo.description);
+			}
+			else {
+				tagList.push(tag);
+				tagsObject.push({"name":tag,"todos":[todo.description]});
+			}
+		});
+	});
+	return tagsObject;
+	console.log(tagsObject);
+};
+
 var showAlert = function (item) {
     var $alertline = $("<div>");
     var $alertbox = $("<span>").attr("style","margin-bottom: 5px; border-radius: 5px 5px 5px 5px; padding: 5px; color: white; background: green; opacity: 0.6; float: left;");
@@ -100,4 +142,8 @@ var sleep = function (ms) {
 };
 
 
-$(document).ready(main);
+$(document).ready(function () {
+	$.getJSON("todos.json", function (toDoObjects) {
+		main(toDoObjects);
+	});
+});

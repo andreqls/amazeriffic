@@ -1,20 +1,10 @@
 var main = function (toDoObjects) {
     "use strict";
 
-    var toDos = toDoObjects.map(function (toDo) {
+/*    var toDos = toDoObjects.map(function (toDo) {
 		return toDo.description;
 	});
-
-/*    var oldToDos = [
-        "Finish writing book",
-        "Take Gracie to the park",
-        "Answer emails",
-        "Walk dog",
-        "Get groceries",
-        "Read on CSS"
-    ];
 */
-
     $(".tabs div").toArray().forEach(function (element) {
         $(element).on("click", function () {
 
@@ -93,6 +83,10 @@ var main = function (toDoObjects) {
                         ntags=$("#newtag").val();
                         if (ntodo && ntags) {
                             toDoObjects.push({"description":ntodo, "tags":ntags.split(",")});
+                            $.post("todos", toDoObjects[toDoObjects.length-1], function (response) {
+                                console.log("We posted and the server responded!");
+                                console.log(response);
+                            });
                             showAlert(ntodo);
                             $("#newtodo").val("");
                             $("#newtag").val("");
@@ -106,6 +100,10 @@ var main = function (toDoObjects) {
                         ntags=$("#newtag").val();
                         if (ntodo && ntags) {
                             toDoObjects.push({"description":ntodo, "tags":ntags.split(",")});
+                            $.post("todos", toDoObjects[toDoObjects.length-1], function (response) {
+                                console.log("We posted and the server responded!");
+                                console.log(response);
+                            });
                             showAlert(ntodo);
                             $("#newtodo").val("");
                             $("#newtag").val("");
@@ -118,7 +116,11 @@ var main = function (toDoObjects) {
                     ntags=$("#newtag").val();
                     if (ntodo && ntags) {
                         toDoObjects.push({"description":ntodo, "tags":ntags.split(",")});
-                        showAlert(ntodo);
+                        $.post("todos", toDoObjects[toDoObjects.length-1], function (response) {
+                            console.log("We posted and the server responded!");
+                            console.log(response);
+                        });
+                       showAlert(ntodo);
                         $("#newtodo").val("");
                         $("#newtag").val("");
                     }

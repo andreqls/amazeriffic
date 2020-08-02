@@ -13,10 +13,19 @@ var express=require("express"),
 	];
 
 app.use(express.static(__dirname+"/client"));
+app.use(express.urlencoded());
 
 http.createServer(app).listen(3000);
 
 app.get("/todos.json",function(req,res){
 	res.json(toDos);
+});
+
+
+app.post("/todos", function (req,res) {
+    var newToDo = req.body;
+    console.log(newToDo);
+    toDos.push(newToDo);
+    res.json({"message":"You posted to the server!"});
 });
 

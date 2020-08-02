@@ -19,8 +19,7 @@ var main = function (toDoObjects) {
         $(element).on("click", function () {
 
             var $element=$(element),
-                $content,
-                ntodo;
+                $content,$taglist;
 
             $(".tabs div").removeClass("active");
             $(element).addClass("active");
@@ -28,8 +27,13 @@ var main = function (toDoObjects) {
 
             if ($element.parent().is(":nth-child(1)")) {
                 $content = $("<ul>");
-                toDos.forEach(function (todo) {
-                    $content.prepend($("<li>").text(todo));
+                toDoObjects.forEach(function (todo) {
+                    $taglist = $("<ul>");
+                    todo.tags.forEach(function (tag) {
+                        $taglist.append($("<li>").text(tag));
+                    });
+                    $content.prepend($taglist);
+                    $content.prepend($("<li>").text(todo.description));
                 });
                 $content.hide();
                 $("main .content").append($content);
@@ -38,8 +42,13 @@ var main = function (toDoObjects) {
 
             else if ($element.parent().is(":nth-child(2)")) {
                 $content = $("<ul>");
-                toDos.forEach(function (todo) {
-                    $content.append($("<li>").text(todo));
+                toDoObjects.forEach(function (todo) {
+                    $taglist = $("<ul>");
+                    $content.append($("<li>").text(todo.description));
+                    todo.tags.forEach(function (tag) {
+                        $taglist.append($("<li>").text(tag));
+                    });
+                    $content.append($taglist);
                 });
                 $content.hide();
                 $("main .content").append($content);
@@ -48,7 +57,6 @@ var main = function (toDoObjects) {
 
 			else if ($element.parent().is(":nth-child(3)")) {
 				var organizedByTag = tagOrg(toDoObjects);
-				console.log(organizedByTag);
 
 				organizedByTag.forEach(function (tag) {
 					var $tagName=$("<h3>").text(tag.name),
@@ -65,37 +73,54 @@ var main = function (toDoObjects) {
 			}
 
             else if ($element.parent().is(":nth-child(4)")) {
-                var ntodo;
+                var ntodo,ntags;
                 $content=$("<div>");
 
 				$content.append($("<p>").text("Description"));
-                $content.append($("<input>").attr({"type":"text"}));
+                $content.append($("<input>").attr({"type":"text","id":"newtodo"}));
 
 				$content.append($("<p>").text("Tags"));
-				$content.append($("<input>").attr({"type":"text"}));
+				$content.append($("<input>").attr({"type":"text","id":"newtag"}));
                 $content.append($("<button>").text("+"));
 
                 $content.hide();
                 $("main .content").append($content);
                 $content.fadeIn();
 
-                $("main .content input").on("keypress", function (event) {
+                $("#newtodo").on("keypress", function (event) {
                     if (event.keyCode==13) {
-                        ntodo=$("main .content input").val();
-                        if (ntodo) {
-                            toDos.push(ntodo);
+                        ntodo=$("#newtodo").val();
+                        ntags=$("#newtag").val();
+                        if (ntodo && ntags) {
+                            toDoObjects.push({"description":ntodo, "tags":ntags.split(",")});
                             showAlert(ntodo);
-                            $("main .content input").val("");
+                            $("#newtodo").val("");
+                            $("#newtag").val("");
                         }
                     }
                 });
                 
+                $("#newtag").on("keypress", function (event) {
+                    if (event.keyCode==13) {
+                        ntodo=$("#newtodo").val();
+                        ntags=$("#newtag").val();
+                        if (ntodo && ntags) {
+                            toDoObjects.push({"description":ntodo, "tags":ntags.split(",")});
+                            showAlert(ntodo);
+                            $("#newtodo").val("");
+                            $("#newtag").val("");
+                        }
+                    }
+                });
+
                 $("main .content button").on("click", function () {
-                    ntodo=$("main .content input").val();
-                    if (ntodo) { // only do something if ntodo is defined
-                        toDos.push(ntodo);
+                    ntodo=$("#newtodo").val();
+                    ntags=$("#newtag").val();
+                    if (ntodo && ntags) {
+                        toDoObjects.push({"description":ntodo, "tags":ntags.split(",")});
                         showAlert(ntodo);
-                        $("main .content input").val("");
+                        $("#newtodo").val("");
+                        $("#newtag").val("");
                     }
                 });
             }
@@ -104,7 +129,7 @@ var main = function (toDoObjects) {
         });
     });
 
-    $(".tabs a:nth-child(3) div").trigger("click");
+    $(".tabs a:nth-child(4) div").trigger("click");
 
 };
 
@@ -125,6 +150,8 @@ var tagOrg = function (toDoObjects) {
 	console.log(tagsObject);
 };
 
+
+/* Future: also show the tags in the alert */
 var showAlert = function (item) {
     var $alertline = $("<div>");
     var $alertbox = $("<span>").attr("style","margin-bottom: 5px; border-radius: 5px 5px 5px 5px; padding: 5px; color: white; background: green; opacity: 0.6; float: left;");

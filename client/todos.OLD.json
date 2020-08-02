@@ -1,0 +1,11 @@
+[
+	{
+		"description": "Get groceries",
+		"tags": [ "chores", "shopping" ]
+	},
+
+	{
+		"description": "Finish writing book",
+		"tags": [ "chores", "research" ]
+	}
+]
